@@ -8,14 +8,14 @@
 
 <body>
     <h1>Đăng nhập Hệ thống</h1>
-    <form>
+    <form action="/dashboard" method="POST">
         <label for="username">Tên người dùng:</label><br>
-        <input type="text" id="username" name="username"><br><br>
+        <input type="text" id="username" name="username" required><br><br>
 
         <label for="password">Mật khẩu:</label><br>
-        <input type="password" id="password" name="password"><br><br>
+        <input type="password" id="password" name="password" required><br><br>
 
-        <button id="login-button">Đăng nhập</button>
+        <input type="submit" value="Đăng nhập" id="login-btn">
     </form>
 </body>
 
