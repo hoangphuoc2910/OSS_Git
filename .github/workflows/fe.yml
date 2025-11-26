@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy Static Site
 
 on:
   push:
@@ -6,40 +6,24 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Lấy code về
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. Cài đặt Node.js (Thay cho .NET)
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18' # Hoặc version bạn đang dùng
+    # BỎ QUA BƯỚC SETUP NODE & BUILD
 
-    # 3. Cài thư viện và Build
-    - name: Install and Build
-      run: |
-        npm install
-        npm run build 
-      # Lệnh trên sẽ tạo ra thư mục 'dist' hoặc 'build' chứa web đã đóng gói
-
-    # 4. Upload lên Somee
     - name: Upload to Somee via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        
-        # QUAN TRỌNG: Thay đổi tùy theo framework bạn dùng
-        # Nếu dùng Vite (React/Vue) -> thường là ./dist/
-        # Nếu dùng Create-React-App -> thường là ./build/
-        # Nếu dùng Angular -> thường là ./dist/ten-project/
-        local-dir: ./
-        
-        # Đường dẫn trên server Somee (Lấy từ ảnh cũ của bạn)
+        local-dir: ./             # Upload toàn bộ thư mục gốc lên
         server-dir: /www.dh52201267oss.somee.com/
+        exclude: |                # Loại bỏ mấy file rác không cần thiết
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
