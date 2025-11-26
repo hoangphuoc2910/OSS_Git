@@ -39,7 +39,7 @@ jobs:
         # Nếu dùng Vite (React/Vue) -> thường là ./dist/
         # Nếu dùng Create-React-App -> thường là ./build/
         # Nếu dùng Angular -> thường là ./dist/ten-project/
-        local-dir: ./dist/ 
+        local-dir: ./
         
         # Đường dẫn trên server Somee (Lấy từ ảnh cũ của bạn)
         server-dir: /www.dh52201267oss.somee.com/
